@@ -78,8 +78,16 @@ function clearForm() {
 }
 
 function isFormValid() {
+  bookmarkIndex = bookmarks.findIndex(function (bookmark) {
+    return bookmark.name == siteNameInput.value.trim();
+  });
+  if (bookmarkIndex > -1) {
+    swal.fire("Sorry!", "site name is already exist", "warning");
+    return false;
+  }
+
   if (!siteNameRegex.test(siteNameInput.value.trim())) {
-    swal.fire("Site Name Error!", "siteName should be at least 3 characters and first letter should be Capital", "error");
+    swal.fire("Site Name Error!", "site name should be at least 3 characters and first letter should be Capital", "error");
     return false;
   }
   if (!siteURLRegex.test(siteURLInput.value.trim())) {
